@@ -44,6 +44,15 @@ def plotDecay(time,n,figsize=(10,8)):
     plt.xlabel('Time / hours')
     plt.ylabel('% atoms')
     plt.show()
+def plotEnergy(time,e,figsize=(10,8)):
+    plt.figure(figsize=figsize)
+    plt.plot(time ,e)
+    plt.legend()
+    plt.xticks(np.arange(0,time[-1],3600),np.arange(0,time[-1],3600)/3600)
+    plt.xlabel('Time / hours')
+    plt.ylabel('Total Energy Released / MeV')
+    plt.yscale('log')
+    plt.show()
 def calculateAge(n,Pb211ratio):
     nTimestep = n['Pb'].size
     for i in range(0,nTimestep):
