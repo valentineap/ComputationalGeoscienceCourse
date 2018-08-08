@@ -37,3 +37,45 @@ def plotSpectralData(fmin,fmax,npts,data,filename=None,figsize=(8,6),window=None
                                                               info.group('sample')),transform=plt.gca().transAxes)
         plt.text(0.1,0.8,"Filename: "+filename,transform=plt.gca().transAxes)
     plt.show()
+
+def cutPortion(fmin,fmax,npts,data,low_cut,high_cut):
+    fvals = np.linspace(fmax,fmin,npts)
+    
+    x = fvals[(fvals>low_cut)&(fvals<high_cut)]
+    y = data[(fvals>low_cut)&(fvals<high_cut)]
+    
+    plt.plot(x,y)
+    
+    return x, y
+    
+def fitBackground(x,y,roi):
+    
+    x1 = x[(x>roi[0])&(x<roi[1])]
+    y1 = y[(x>roi[0])&(x<roi[1])]
+
+    x2 = x[(x>roi[2])&(x<roi[3])]
+    y2 = y[(x>roi[2])&(x<roi[3])]
+
+    x_bas = np.hstack((x1,x2))
+    y_bas = np.hstack((y1,y2))
+
+    p = np.polyfit(x_bas,y_bas,1)
+
+
+
+    plt.plot(x,y,"k.",label="signal")
+    plt.plot(x_bas,y_bas,"b.",label="anchors for fit")
+    plt.plot(x,np.polyval(p,x),"r-",label="baseline")
+    plt.legend()
+    return np.polyval(p,x)
+
+def trapz(x, y):
+    # Trapezoidal integration rule
+    n = len(x)
+    
+    r = 0.0
+
+    for i in range(1,n):
+        r += (x[i] - x[i-1]) * (y[i] + y[i-1])
+    trapz_int = r/2.0
+    return trapz_int
