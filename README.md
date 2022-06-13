@@ -32,7 +32,7 @@ If you wish to work through this course on your own computer, you first need to 
 ### In the cloud
 You can [click here](https://mybinder.org/v2/gh/valentineap/ComputationalGeoscienceCourse/HEAD?labpath=index.ipynb) to run the Jupyter notebooks via BinderHub. This allows you to try them out without installing anything. However, you cannot save you work.
 
-Alternatively, if you have [Google Drive](drive.google.com) account, you can upload a copy of the [Zip file](https://github.com/valentineap/ComputationalGeoscienceCourse/zipball/master) there, unpack it, and then execute the notebooks using Google Colab.
+Alternatively, if you have [Google Drive](drive.google.com) account, you can upload a copy of the [zip file](https://github.com/valentineap/ComputationalGeoscienceCourse/zipball/master) there, unpack it, and then execute the notebooks using Google Colab.
 
 ## Bugs and feedback
 If you find anything that does not seem to be working correctly, or you have other feedback, please feel free to open an issue in the [Issue Tracker](https://github.com/valentineap/ComputationalGeoscienceCourse/issues). You can also [email me](mailto:andrew.valentine@durham.ac.uk). 
