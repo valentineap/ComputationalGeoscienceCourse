@@ -30,7 +30,7 @@ You can download this repository as a Zip file by [clicking here](https://github
 If you wish to work through this course on your own computer, you first need to install Python and Jupyter. There are many different ways to do this; one good option for novices is to install the free [Anaconda Python Distribution](https://www.anaconda.com/products/distribution). Once this is installed, running the `Anaconda Navigator` app should present buttons for launching a number of different tools, one of which is `Jupyter Notebook`. Clicking this should (eventually) open a Jupyter window within your web browser, and you will see a listing of the files on your computer. Navigate to your downloaded copy of this repository, and open `index.ipynb`. You can then click links that take you to each exercise.
 
 ### In the cloud
-You can [click here](https://mybinder.org/v2/gh/valentineap/ComputationalGeoscienceCourse/HEAD?labpath=index.ipynb) to run the Jupyter notebooks via BinderHub. This allows you to try them out without installing anything. However, you cannot save you work.
+You can [click here](https://mybinder.org/v2/gh/valentineap/ComputationalGeoscienceCourse/binder?labpath=index.ipynb) to run the Jupyter notebooks via BinderHub. This allows you to try them out without installing anything. However, you cannot save you work.
 
 Alternatively, if you have [Google Drive](drive.google.com) account, you can upload a copy of the [zip file](https://github.com/valentineap/ComputationalGeoscienceCourse/zipball/master) there, unpack it, and then execute the notebooks using Google Colab.
 
