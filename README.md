@@ -1,3 +1,5 @@
+[![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/valentineap/ComputationalGeoscienceCourse/binder?labpath=index.ipynb)
+
 # Computational Geoscience Course
 
 This course provides an introduction to Python programming for geoscientists. It was developed and delivered at the [Research School of Earth Sciences](https://earthsciences.anu.edu.au), [Australian National University](https://www.anu.edu.au) between 2018 and 2020 by Oscar Branson, Charles Le Losq, Rebecca McGirr and Andrew Valentine. 
