@@ -1,0 +1,760 @@
+
+% Default to the notebook output style
+
+    
+
+
+% Inherit from the specified cell style.
+
+
+
+
+    
+\documentclass[11pt]{article}
+
+    
+    
+    \usepackage[T1]{fontenc}
+    % Nicer default font (+ math font) than Computer Modern for most use cases
+    \usepackage{mathpazo}
+
+    % Basic figure setup, for now with no caption control since it's done
+    % automatically by Pandoc (which extracts ![](path) syntax from Markdown).
+    \usepackage{graphicx}
+    % We will generate all images so they have a width \maxwidth. This means
+    % that they will get their normal width if they fit onto the page, but
+    % are scaled down if they would overflow the margins.
+    \makeatletter
+    \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth
+    \else\Gin@nat@width\fi}
+    \makeatother
+    \let\Oldincludegraphics\includegraphics
+    % Set max figure width to be 80% of text width, for now hardcoded.
+    \renewcommand{\includegraphics}[1]{\Oldincludegraphics[width=.8\maxwidth]{#1}}
+    % Ensure that by default, figures have no caption (until we provide a
+    % proper Figure object with a Caption API and a way to capture that
+    % in the conversion process - todo).
+    \usepackage{caption}
+    \DeclareCaptionLabelFormat{nolabel}{}
+    \captionsetup{labelformat=nolabel}
+
+    \usepackage{adjustbox} % Used to constrain images to a maximum size 
+    \usepackage{xcolor} % Allow colors to be defined
+    \usepackage{enumerate} % Needed for markdown enumerations to work
+    \usepackage{geometry} % Used to adjust the document margins
+    \usepackage{amsmath} % Equations
+    \usepackage{amssymb} % Equations
+    \usepackage{textcomp} % defines textquotesingle
+    % Hack from http://tex.stackexchange.com/a/47451/13684:
+    \AtBeginDocument{%
+        \def\PYZsq{\textquotesingle}% Upright quotes in Pygmentized code
+    }
+    \usepackage{upquote} % Upright quotes for verbatim code
+    \usepackage{eurosym} % defines \euro
+    \usepackage[mathletters]{ucs} % Extended unicode (utf-8) support
+    \usepackage[utf8x]{inputenc} % Allow utf-8 characters in the tex document
+    \usepackage{fancyvrb} % verbatim replacement that allows latex
+    \usepackage{grffile} % extends the file name processing of package graphics 
+                         % to support a larger range 
+    % The hyperref package gives us a pdf with properly built
+    % internal navigation ('pdf bookmarks' for the table of contents,
+    % internal cross-reference links, web links for URLs, etc.)
+    \usepackage{hyperref}
+    \usepackage{longtable} % longtable support required by pandoc >1.10
+    \usepackage{booktabs}  % table support for pandoc > 1.12.2
+    \usepackage[inline]{enumitem} % IRkernel/repr support (it uses the enumerate* environment)
+    \usepackage[normalem]{ulem} % ulem is needed to support strikethroughs (\sout)
+                                % normalem makes italics be italics, not underlines
+    \usepackage{mathrsfs}
+    
+
+    
+    
+    % Colors for the hyperref package
+    \definecolor{urlcolor}{rgb}{0,.145,.698}
+    \definecolor{linkcolor}{rgb}{.71,0.21,0.01}
+    \definecolor{citecolor}{rgb}{.12,.54,.11}
+
+    % ANSI colors
+    \definecolor{ansi-black}{HTML}{3E424D}
+    \definecolor{ansi-black-intense}{HTML}{282C36}
+    \definecolor{ansi-red}{HTML}{E75C58}
+    \definecolor{ansi-red-intense}{HTML}{B22B31}
+    \definecolor{ansi-green}{HTML}{00A250}
+    \definecolor{ansi-green-intense}{HTML}{007427}
+    \definecolor{ansi-yellow}{HTML}{DDB62B}
+    \definecolor{ansi-yellow-intense}{HTML}{B27D12}
+    \definecolor{ansi-blue}{HTML}{208FFB}
+    \definecolor{ansi-blue-intense}{HTML}{0065CA}
+    \definecolor{ansi-magenta}{HTML}{D160C4}
+    \definecolor{ansi-magenta-intense}{HTML}{A03196}
+    \definecolor{ansi-cyan}{HTML}{60C6C8}
+    \definecolor{ansi-cyan-intense}{HTML}{258F8F}
+    \definecolor{ansi-white}{HTML}{C5C1B4}
+    \definecolor{ansi-white-intense}{HTML}{A1A6B2}
+    \definecolor{ansi-default-inverse-fg}{HTML}{FFFFFF}
+    \definecolor{ansi-default-inverse-bg}{HTML}{000000}
+
+    % commands and environments needed by pandoc snippets
+    % extracted from the output of `pandoc -s`
+    \providecommand{\tightlist}{%
+      \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+    \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+    % Add ',fontsize=\small' for more characters per line
+    \newenvironment{Shaded}{}{}
+    \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
+    \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{{#1}}}}
+    \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{{#1}}}
+    \newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{{#1}}}
+    \newcommand{\RegionMarkerTok}[1]{{#1}}
+    \newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\NormalTok}[1]{{#1}}
+    
+    % Additional commands for more recent versions of Pandoc
+    \newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{{#1}}}
+    \newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{{#1}}}
+    \newcommand{\ImportTok}[1]{{#1}}
+    \newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{{#1}}}}
+    \newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{{#1}}}
+    \newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{{#1}}}
+    \newcommand{\BuiltInTok}[1]{{#1}}
+    \newcommand{\ExtensionTok}[1]{{#1}}
+    \newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{{#1}}}
+    \newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{{#1}}}
+    \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    
+    
+    % Define a nice break command that doesn't care if a line doesn't already
+    % exist.
+    \def\br{\hspace*{\fill} \\* }
+    % Math Jax compatibility definitions
+    \def\gt{>}
+    \def\lt{<}
+    \let\Oldtex\TeX
+    \let\Oldlatex\LaTeX
+    \renewcommand{\TeX}{\textrm{\Oldtex}}
+    \renewcommand{\LaTeX}{\textrm{\Oldlatex}}
+    % Document parameters
+    % Document title
+    \title{EMSC8014 Assessment}
+    
+    
+    
+    
+    
+
+    % Pygments definitions
+    
+\makeatletter
+\def\PY@reset{\let\PY@it=\relax \let\PY@bf=\relax%
+    \let\PY@ul=\relax \let\PY@tc=\relax%
+    \let\PY@bc=\relax \let\PY@ff=\relax}
+\def\PY@tok#1{\csname PY@tok@#1\endcsname}
+\def\PY@toks#1+{\ifx\relax#1\empty\else%
+    \PY@tok{#1}\expandafter\PY@toks\fi}
+\def\PY@do#1{\PY@bc{\PY@tc{\PY@ul{%
+    \PY@it{\PY@bf{\PY@ff{#1}}}}}}}
+\def\PY#1#2{\PY@reset\PY@toks#1+\relax+\PY@do{#2}}
+
+\expandafter\def\csname PY@tok@w\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.73,0.73}{##1}}}
+\expandafter\def\csname PY@tok@c\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.74,0.48,0.00}{##1}}}
+\expandafter\def\csname PY@tok@k\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.69,0.00,0.25}{##1}}}
+\expandafter\def\csname PY@tok@o\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ow\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@ne\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.82,0.25,0.23}{##1}}}
+\expandafter\def\csname PY@tok@nv\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@no\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ni\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.60,0.60,0.60}{##1}}}
+\expandafter\def\csname PY@tok@na\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.49,0.56,0.16}{##1}}}
+\expandafter\def\csname PY@tok@nt\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@s\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sd\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@si\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@se\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sr\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@ss\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sx\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@m\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@gh\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gu\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.50,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gr\endcsname{\def\PY@tc##1{\textcolor[rgb]{1.00,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ge\endcsname{\let\PY@it=\textit}
+\expandafter\def\csname PY@tok@gs\endcsname{\let\PY@bf=\textbf}
+\expandafter\def\csname PY@tok@gp\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@go\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.53,0.53}{##1}}}
+\expandafter\def\csname PY@tok@gt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.27,0.87}{##1}}}
+\expandafter\def\csname PY@tok@err\endcsname{\def\PY@bc##1{\setlength{\fboxsep}{0pt}\fcolorbox[rgb]{1.00,0.00,0.00}{1,1,1}{\strut ##1}}}
+\expandafter\def\csname PY@tok@kc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kd\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kr\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@bp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@fm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@vc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vg\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sa\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@dl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s2\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s1\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@mb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@il\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mo\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ch\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cm\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cpf\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@c1\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cs\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+
+\def\PYZbs{\char`\\}
+\def\PYZus{\char`\_}
+\def\PYZob{\char`\{}
+\def\PYZcb{\char`\}}
+\def\PYZca{\char`\^}
+\def\PYZam{\char`\&}
+\def\PYZlt{\char`\<}
+\def\PYZgt{\char`\>}
+\def\PYZsh{\char`\#}
+\def\PYZpc{\char`\%}
+\def\PYZdl{\char`\$}
+\def\PYZhy{\char`\-}
+\def\PYZsq{\char`\'}
+\def\PYZdq{\char`\"}
+\def\PYZti{\char`\~}
+% for compatibility with earlier versions
+\def\PYZat{@}
+\def\PYZlb{[}
+\def\PYZrb{]}
+\makeatother
+
+
+    % Exact colors from NB
+    \definecolor{incolor}{rgb}{0.0, 0.0, 0.5}
+    \definecolor{outcolor}{rgb}{0.545, 0.0, 0.0}
+
+
+
+    
+    % Prevent overflowing lines due to hard-to-break entities
+    \sloppy 
+    % Setup hyperref package
+    \hypersetup{
+      breaklinks=true,  % so long urls are correctly broken across lines
+      colorlinks=true,
+      urlcolor=urlcolor,
+      linkcolor=linkcolor,
+      citecolor=citecolor,
+      }
+    % Slightly bigger margins than the latex defaults
+    
+    \geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+    
+    
+
+    \begin{document}
+    
+    
+    \maketitle
+    
+    
+
+    
+    \hypertarget{emsc8014-assessed-exercise}{%
+\section*{EMSC8014 Assessed exercise}\label{emsc8014-assessed-exercise}}
+
+\emph{Due: 5pm Friday 26th October}
+
+Once your solution is complete, you should:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Ensure it has been saved (select
+  \texttt{File\ \textgreater{}\ Save\ and\ checkpoint} from the Jupyter
+  menu)
+\item
+  Select
+  \texttt{File\ \textgreater{}\ Download\ as...\ \textgreater{}\ Notebook\ (.ipynb)}
+  from the Jupyter menu
+\item
+  Save the file on your computer
+\item
+  Submit this file via Wattle.
+\end{enumerate}
+
+N.B. Since it is possible to accidentally delete cells from this Jupyter
+notebook, you are also provided with a \texttt{.pdf} version. It is your
+responsibility to ensure that your solution is complete before
+submitting it.
+
+\hypertarget{important-information}{%
+\subsubsection*{Important information}\label{important-information}}
+
+\begin{itemize}
+\item
+  This assessed exercise is made up of a number of tasks. You should
+  attempt all of them. The approximate weight to be given to each task
+  during grading is shown as a percentage for each.
+\item
+  You should write your solutions within this Jupyter notebook. You may
+  add additional Markdown (text) and code cells as appropriate. Your
+  solution should be entirely self-contained (i.e., you should not
+  create additional notebooks or other files). Everything appearing in
+  the submitted notebook should be intended for assessment; do not
+  include rough working.
+\item
+  Your solution should run without error on the RSES Jupyter server,
+  when all cells are executed in the order in which they appear (e.g.~by
+  selecting \texttt{Kernel\ \textgreater{}\ Restart\ \&\ Run\ All} from
+  the Jupyter menu).
+\item
+  You may choose to make use of the following modules:
+
+  \begin{itemize}
+  \tightlist
+  \item
+    \texttt{numpy}
+  \item
+    \texttt{matplotlib}
+  \item
+    \texttt{pandas}
+  \item
+    \texttt{cartopy}
+  \item
+    \texttt{datetime}
+  \item
+    \texttt{math}
+  \item
+    \texttt{re}
+  \end{itemize}
+
+  \textbf{No other modules may be used} unless you have obtained
+  permission from the course convenor (Dr Andrew Valentine). Note that
+  you may not need to use all of the modules in the above list.
+\item
+  Where a task asks you to ``write a function'', you are expected to
+  produce one function that can be called to generate all required
+  output. However, you are free to organise this as you wish, and you
+  may choose to write additional functions which get called within your
+  main function.
+\item
+  You should include an example of how your function is intended to be
+  used.
+\end{itemize}
+
+\hypertarget{marking-policy}{%
+\subsubsection*{Marking policy}\label{marking-policy}}
+
+\begin{itemize}
+\item
+  There is never a single `correct' way to solve a programming problem.
+  You will gain marks for any solution that achieves the desired
+  goal(s). Higher marks will be awarded for solutions that are:
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Clear: code is easy for someone else to understand (and perhaps
+    modify)
+  \item
+    Documented: code contains docstrings and comments as appropriate
+  \item
+    Concise: code is not excessively long or complicated for the task at
+    hand
+  \item
+    General: code can easily be adapted to solve related problems
+  \item
+    Robust: code appropriately handles any errors that might reasonably
+    be expected to occur, especially those related to user input.
+  \end{itemize}
+\item
+  Some tasks require you to produce figures. These should be of a
+  standard suitable for inclusion in a research paper. Marks will be
+  awarded for:
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Correctness of information presented; remember to include titles,
+    axis labels and legends where appropriate.
+  \item
+    Clarity of layout: is your figure easy to interpret and
+    visually-pleasing?
+  \item
+    Attention to detail: are there any inconsistencies in the way you
+    are presenting information?
+  \end{itemize}
+\item
+  If you are unable to complete a task, you should:
+
+  \begin{enumerate}
+  \def\labelenumi{\arabic{enumi}.}
+  \tightlist
+  \item
+    Submit your best attempt, and
+  \item
+    Include a note (comment or Markdown) explaining which piece(s) of
+    your solution you believe to be incorrect or incomplete, and why.
+  \item
+    If you believe you understand the algorithm (sequence of operations)
+    to perform a task, but have not been able to implement this in
+    Python, you should explain it in full.
+  \end{enumerate}
+
+  Partial credit may be given for such work.
+\item
+  You are allowed to make use of internet resources, class notes, and to
+  talk to other people about how to solve these tasks. However,
+  \textbf{everything that appears in your solution must be your own,
+  individual work}. You should not collaborate with someone else to
+  produce a solution, or copy their work. In particular, you
+  \textbf{must} understand, and be able to fully explain, everything
+  that appears in your solution. \textbf{If you cannot, you will not
+  receive any marks for that task.}
+\item
+  Drop-in sessions (optional) will be held from 12-2 pm on:
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Wednesday 10 October
+  \item
+    Monday 15 October
+  \item
+    Friday 19 October
+  \item
+    Wednesday 24 October
+  \end{itemize}
+
+  These will all take place in the TerraView Room at RSES (Jaeger 2, top
+  floor). One of the course tutors will be available to answer any
+  questions you have.
+\item
+  Oral exams will be held on Tuesday 30th and Wednesday 31st October, in
+  Dr Valentine's office at RSES (Jaeger 2, Room 147a). You will be
+  informed of the time at which you should attend. During the oral exam,
+  you will be asked to explain your solutions to this assessed exercise,
+  and discuss why you chose to implement them in the way that you did.
+  No special preparation is required, but you may wish to re-read your
+  solutions prior to the examination. \textbf{Failure to attend the oral
+  examination (without good cause) will result in you receiving no marks
+  for this assessment.}
+\end{itemize}
+
+For each task, a \textbf{failing mark} will be awarded where:
+
+\begin{itemize}
+\item
+  The submitted solution does not accomplish the goal(s) described for
+  the task.
+\item
+  The student is unable to explain how their solution works, and why
+  they chose to tackle the problem in a certain way.
+\item
+  Output (figures/text files) contain significant errors. Figures are
+  well below the standard expected for a good-quality journal, through
+  omission of important information or poor visual standard.
+\item
+  The examiners are not satisfied that the solution is the student's
+  own, independent work.
+\end{itemize}
+
+A \textbf{passing mark} will be awarded where:
+
+\begin{itemize}
+\item
+  The solution accomplishes the principal goal(s) described for the
+  task, perhaps with some minor errors or omissions.
+\item
+  The code is functional, but unsophisticated; it may contain
+  significant redundancy or unnecessary computation.
+\item
+  It is difficult for someone looking at the code for the first time to
+  understand the program logic; variable names are poorly-chosen, and
+  the program is not well-organised.
+\item
+  There is little or no documentation (e.g.~comments and docstrings)
+  provided.
+\item
+  Little or no attempt is made to handle common sources of error
+  (e.g.~bad user input).
+\item
+  Output (figures and/or text files) are accurate but lacking polish.
+\item
+  The student has demonstrated familiarity with only a limited subset of
+  the Python capabilities covered in the course.
+\item
+  The student is able to explain, in basic terms, how the code solves
+  the assigned task.
+\end{itemize}
+
+A \textbf{good mark} will be awarded where:
+
+\begin{itemize}
+\item
+  The solution accomplishes goal(s) described for the task without any
+  errors or omissions.
+\item
+  The code is well-structured and appropriate to the task in hand.
+\item
+  Code is reasonably understandable, with meaningful variable names and
+  a clear organisation.
+\item
+  Basic documentation is provided through comments and docstrings.
+\item
+  Common sources of error (e.g.~bad user input) are handled in a
+  sensible fashion.
+\item
+  Outputs are well laid out and (for figures) visually pleasing.
+\item
+  The student displays knowledge of a broad range of Python
+  capabilities, as apropriate to the task.
+\item
+  The student is able to explain their code well, perhaps showing some
+  awareness of alternative ways in which the problem could have been
+  tackled.
+\end{itemize}
+
+An \textbf{excellent mark} will be awarded where:
+
+\begin{itemize}
+\item
+  The solution fully accomplishes all aspects of the task without error.
+\item
+  Code is clear, concise and readily-understood by anyone who reads it.
+\item
+  Code is fully-documented with comprehensive docstrings and comments
+  that help the reader understand how the code works.
+\item
+  The code is robust, with all common sources of error handled elegantly
+  and effectively.
+\item
+  Figures are of a high standard, with care taken to maximise clarity
+  and information content.
+\item
+  The student displays full knowledge of the Python programming language
+  (to the extent covered in the course), and consistently chooses the
+  most appropriate tools at their disposal.
+\item
+  The student has a comprehensive understanding of their code, and is
+  able to discuss the advantages and disadvantages of various solution
+  strategies, justifying why they chose to adopt one and not the others.
+\item
+  The solution may go beyond what is strictly required to answer the
+  assigned task, or employ aspects of Python that were not explored
+  during the course.
+\end{itemize}
+
+Good luck!
+
+\begin{center}\rule{0.5\linewidth}{\linethickness}\end{center}
+
+    \hypertarget{the-fibonacci-sequence-10}{%
+\subsection*{1. The Fibonacci Sequence
+(10\%)}\label{the-fibonacci-sequence-10}}
+
+The \href{https://en.wikipedia.org/wiki/Fibonacci_number}{Fibonacci
+seqence} is a famous sequence of numbers. Each term in the sequence is
+obtained by adding together the previous two terms. The first two terms
+are defined to be (1, 1, \ldots{}).
+
+Write a function that will return a list containing the first \(n\)
+terms of a Fibonacci sequence.
+
+    \hypertarget{the-ideal-gas-law-10}{%
+\subsection*{2. The ideal gas law (10\%)}\label{the-ideal-gas-law-10}}
+
+The ideal gas law relates pressure (\(P\)), volume (\(V\)) and
+temperature (\(T\)) for an `ideal' gas. It states that
+
+\[ PV = nRT \]
+
+where \(n\) is the number of `moles' of gas present, and \(R\) is a
+constant,
+\(R = 8.3145\,\mathrm{L}\,\mathrm{kPa}\,\mathrm{mol}^{-1}\,\mathrm{K}^{-1}\).
+Write a function that allows the user to specify \textbf{any three} of
+the quantities \(P\), \(V\), \(n\) and \(T\), and obtain the fourth.
+
+    \hypertarget{the-substitution-cipher-20}{%
+\subsection*{3. The substitution cipher
+(20\%)}\label{the-substitution-cipher-20}}
+
+In class, we encountered the Caesar cipher for encoding messages.
+Another kind of cipher is a
+`\href{https://en.wikipedia.org/wiki/Substitution_cipher}{substitution
+cipher}'. To encode a message, we first choose a `keyword' - for
+example, \texttt{CHEESE}. If any letter appears in the keyword more than
+once, we delete the subsequent occurrences (giving \texttt{CHES}).
+
+Next, we write out a full alphabet, and a second version where the
+characters that appear in the keyword are shifted to the front:
+
+\begin{verbatim}
+A B C D E F G H I J K L M N O P Q R S T U V W X Y Z    <== Plaintext
+C H E S A B D F G I J K L M N O P Q R T U V W X Y Z    <== Cipher
+\_____/    | |   |                   |    
+Keyword    Characters in keyword moved to front
+\end{verbatim}
+
+To encode a message, we look up each character in the `plaintext' row
+and replace it with the corresponding character from the `cipher' row.
+So, using our keyword \texttt{CHEESE}, the message
+\texttt{I\ AM\ WORKING\ ON\ MY\ ASSIGNMENT} becomes
+\texttt{G\ CL\ WNQJGMD\ NM\ LY\ CRRGDMLAMT}. To decode a message, we
+look up characters in the `cipher' row, and replace them with the
+corresponding character from the `plaintext' row. Any characters not in
+the alphabet (e.g.~punctuation characters and spaces) should be
+unchanged by the encoding/decoding operation.
+
+Write a function which can encode and decode messages using any keyword.
+To help you check that it is working properly, here is a message that
+has been encoded using the keyword \texttt{PYTHON}:
+\texttt{VOFF\ HJIO,\ XJS\ BPUO\ QSTTOQQNSFFX\ HOTJHOH\ P\ GOQQPAO!}
+
+    \hypertarget{global-seismicity-20}{%
+\subsection*{4. Global seismicity (20\%)}\label{global-seismicity-20}}
+
+\textbf{This question has two parts; you should attempt both.}
+
+The file \texttt{earthquakes.dat} contains information about earthquakes
+that have occurred in the last 10 years, drawn from the
+\href{http://www.globalcmt.org}{Global CMT catalogue}. The file contains
+columns corresponding to the earthquake location, magnitude and
+date/time, as follows:
+
+\begin{longtable}[]{@{}llllllllll@{}}
+\toprule
+Latitude & Longitude & Depth & Magnitude & Year & Month & Day & Hour &
+Mins & Secs\tabularnewline
+\midrule
+\endhead
+36.87 & 69.95 & 54.3 & 5.1 & 2000 & 01 & 01 & 05 & 24 &
+35.3\tabularnewline
+-60.72 & 153.67 & 10.0 & 6.0 & 2000 & 01 & 01 & 05 & 58 &
+19.8\tabularnewline
+\ldots{} & \ldots{} & \ldots{} & \ldots{} & \ldots{} & \ldots{} &
+\ldots{} & \ldots{} & \ldots{} & \ldots{}\tabularnewline
+\bottomrule
+\end{longtable}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  Make a global map plotting the location of every earthquake in the
+  file.
+\item
+  Write a function that allows the user to specify ranges for any or all
+  of: latitude, longitude and depth. The function should then
+
+  \begin{enumerate}
+  \def\labelenumii{\arabic{enumii}.}
+  \tightlist
+  \item
+    produce a map of only those events that fall within the specified
+    range(s), with information about earthquake depth shown using
+    colour, AND
+  \item
+    write out a new file (in the same format as
+    \texttt{earthquakes.dat}) that contains only the selected events.
+  \end{enumerate}
+\end{enumerate}
+
+    \hypertarget{infrared-spectroscopy-20}{%
+\subsection*{5. Infrared Spectroscopy
+(20\%)}\label{infrared-spectroscopy-20}}
+
+The file \texttt{11octrll32bs1\_2016-10-11T12-48-25.asp} is produced by
+an infrared spectrometer. Look at the file contents. It is formatted as
+follows:
+
+\begin{itemize}
+\tightlist
+\item
+  Line 1: Number of data points in file
+\item
+  Line 2: Wavenumber (cm\({}^{-1}\)) associated with first measurement
+  in file
+\item
+  Line 3: Wavenumber associated with last measurement in file
+\item
+  Line 4-6: Miscellaneous information (not required for this exercise)
+\item
+  Line 7-end: Reflectance measurements (\%).
+\end{itemize}
+
+You can assume that the measurements are evenly-spaced in wavenumber.
+
+The filename encodes some additional information:
+
+\begin{verbatim}
+11octrll32bs1_2016-10-11T12-48-25.asp
+\___/\____/\| \________/ \______/
+  A     B   C      D        E
+  
+A - Date of experiment (11 October)
+B - Location of experiment ('rll32b')
+C - Sample number (Sample 1) -- starting with 's'
+D - Date of experiment (again; 11 October 2016)
+E - Time of experiment (12:48:25)
+\end{verbatim}
+
+Write a function that takes the filename as argument, and produces a
+high-quality figure, showing reflectance (y-axis) plotted against
+wavenumber (x-axis). The following information should also be displayed
+on the figure: - The date and time at which the experiment was run - The
+location, panel and sample numbers - The filename of the datafile.
+
+Your function should work for \emph{any} file of this format. To help
+you test this, you have been provided with a second file from the same
+instrument - \texttt{12octrll61s1\_2016-10-12T10-36-43.asp}.
+
+    \hypertarget{tic-tac-toe-20}{%
+\subsection*{6. Tic-Tac-Toe (20\%)}\label{tic-tac-toe-20}}
+
+\href{https://en.wikipedia.org/wiki/Tic-tac-toe}{Tic-tac-toe} (or
+`noughts and crosses') is a game for two players. Players take it in
+turns to place their mark (`X' for player 1, `O' for player 2) in an
+empty space on a 3 x 3 grid. A player getting 3 marks in a line (row,
+column or diagonal) wins.
+
+Write code to allow you to play Tic-Tac-Toe against the computer. The
+computer should play randomly, placing its mark in any empty cell.
+
+
+    % Add a bibliography block to the postdoc
+    
+    
+    
+    \end{document}
